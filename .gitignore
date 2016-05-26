@@ -60,3 +60,21 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore database.yml
+/config/database.yml
+
+# Ignore OS X special Files
+.DS_Store
+.background/*
+
+# Ignore emacs backup files
+.#*
+*~
