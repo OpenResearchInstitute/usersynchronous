@@ -9,7 +9,8 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%=ENV['LOCAL_DB_USER']%>
-
+  host: localhost
+  
 development:
   <<: *default
   database: u_development_<%= branch %>
