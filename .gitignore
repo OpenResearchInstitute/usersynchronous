@@ -15,3 +15,6 @@
 # Ignore emacs backup files
 .#*
 *~
+
+.ruby-version
+.sass-cache/
