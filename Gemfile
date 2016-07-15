@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 ruby '2.3.0'
@@ -50,6 +51,8 @@ gem 'jbuilder', '~> 2.0'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+gem 'd3js-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

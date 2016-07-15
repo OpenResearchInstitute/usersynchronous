@@ -69,6 +69,8 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    d3js-rails (3.1.6)
+      railties (>= 3.0, < 5.0)
     debug_inspector (0.0.2)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
@@ -218,6 +220,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   byebug
   coffee-rails (~> 4.1.0)
+  d3js-rails
   devise!
   dotenv-rails
   font-awesome-rails
