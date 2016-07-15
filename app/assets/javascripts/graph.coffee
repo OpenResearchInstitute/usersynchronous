@@ -1,8 +1,8 @@
 #  {
-#    'satellite': 'phase4'
-#    'mode': 'voice'
-#    'duration': 20
-#    'station': 'N1NLY'
+#    'satellite': 'phase4',
+#    'mode': 'voice',
+#    'duration': 20,
+#    'station': 'N1NLY',
 #  }
 
 draw = (data) ->
@@ -11,13 +11,7 @@ draw = (data) ->
   width = 420
   barHeight = 20
 
-  x = d3.scale.linear().range([
-    0
-    width
-  ]).domain([
-    0
-    d3.max(data)
-  ])
+  x = d3.scale.linear().range([ 0, width]).domain([0, d3.max(data) ])
 
   chart = d3.select('#graph')
         .attr('width', width)
