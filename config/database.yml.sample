@@ -1,0 +1,26 @@
+# set branch equal to the github branch being worked on, this creates a database
+# for each branch of your code.
+<% branch = `git symbolic-ref HEAD 2>/dev/null`.chomp.sub('refs/heads/', '') %>
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%=ENV['LOCAL_DB_USER']%>
+  host: localhost
+  
+development:
+  <<: *default
+  database: u_development_<%= branch %>
+
+test:
+  <<: *default
+  database: u_test_<%= branch %>
+
+production:
+  <<: *default
+  database: u_production
+  username: u
+  password: <%= ENV['U_DATABASE_PASSWORD'] %>
