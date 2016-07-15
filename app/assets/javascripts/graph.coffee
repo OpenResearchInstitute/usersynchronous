@@ -21,14 +21,12 @@ draw = (data) ->
         .data(data)
         .enter()
         .append('g')
-        .attr('transform', (d, i) -> 'translate(0,' + i * barHeight + ')'
-  )
+        .attr('transform', (d, i) -> 'translate(0,' + i * barHeight + ')')
 
   bar.append('rect')
         .attr('width', x)
         .attr('height', barHeight - 1)
-        .style 'fill', (d) ->
-    color d
+        .style 'fill', (d) -> color d
 
   bar.append('text')
         .attr('x', (d) -> x(d) - 10).attr('y', barHeight / 2)
