@@ -28,7 +28,7 @@ error = ->
 $.ajax
   type: 'GET'
   contentType: 'application/json; charset=utf-8'
-  url: 'data'
+  url: '/graph/data'
   dataType: 'json'
   success: (data) ->
     draw data
