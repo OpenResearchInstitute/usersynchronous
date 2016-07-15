@@ -4,26 +4,26 @@ class GraphController < ApplicationController
 
   def data
 
-#    qsos = [
-#      {
-#        'satellite': 'phase4'
-#        'mode': 'voice'
-#        'duration': 20
-#        'station': 'N1NLY'
-#      }
-#      {
-#        'satellite': 'phase4'
-#        'mode': 'data'
-#        'duration': 600
-#        'station': 'N1CKC'
-#      }
-#      {
-#        'satellite': 'phase4'
-#        'mode': 'voice'
-#        'duration': 60
-#        'station': 'WA2WGY'
-#      }
-#    ]
+    qsos = [
+      {
+        'satellite': 'phase4',
+        'mode': 'voice',
+        'duration': 20,
+        'station': 'N1NLY'
+      },
+      {
+        'satellite': 'phase4',
+        'mode': 'data',
+        'duration': 600,
+        'station': 'N1CKC'
+      },
+      {
+        'satellite': 'phase4',
+        'mode': 'voice',
+        'duration': 60,
+        'station': 'WA2WGY'
+      }
+    ]
 
     data_values = []
     
