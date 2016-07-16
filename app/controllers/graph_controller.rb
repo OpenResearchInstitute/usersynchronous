@@ -15,25 +15,19 @@ class GraphController < ApplicationController
         'satellite': 'phase4',
         'mode': 'data',
         'duration': 600,
-        'station': 'N1CKC'
+        'station': 'N1NLY'
       },
       {
         'satellite': 'phase4',
         'mode': 'voice',
         'duration': 60,
-        'station': 'WA2WGY'
+        'station': 'N1NLY'
       }
     ]
 
-    data_values = []
-    
-    (1..5).each do
-      data_values << rand(10) + 1
-    end
-    
     respond_to do |format|
       format.json {
-        render json: data_values
+        render json: qsos
       }
     end
   end
