@@ -73,12 +73,10 @@ draw = (data) ->
         .attr('transform', (d, i) -> 'translate( -3, 0)')
         .style 'fill', (d) ->
           qsocolor(d.mode)
-  polyh = (d) ->
-        d.duration * (maxlen / maxqsotime)
-  pp = polypoints(angle, maxlen/2, 100, polyh) # (angle, dist, percwidth, height)
 
   segment.append('polygon')
-        .attr('points', pp)
+        #.attr('points', pp)
+        .attr('points', polypoints(angle, maxlen/2, 100, (d) -> (d.duration/maxqsotime)*maxlen))
         .attr('fill', (d) ->
           qsocolor(d.mode))
         #.attr('fill', "red")
