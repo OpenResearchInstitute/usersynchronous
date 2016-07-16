@@ -5,8 +5,10 @@
 # below each fixture, per the syntax in the comments below
 #
 normal:
+  id: 1
   email: normal@user.com
 
 #
 two:
+  id: 2
   email: admin@user.com

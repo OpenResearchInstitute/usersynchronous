@@ -1,0 +1,43 @@
+.navbar.navbar-default{role: 'navgiation'}
+  .container
+    .navbar-header
+      %button.navbar-toggle{ type: 'button', data: { toggle: 'collapse', target: '.navbar-collapse' } }
+        %span.sr-only
+          Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{href: '/'}
+        = image_tag 'qso-map.png', alt: 'QSO Map'
+    .collapse.navbar-collapse
+      - unless user_signed_in?
+        .pull-right.hidden-xs
+          %ul.nav.navbar-nav
+            %li
+              = link_to new_user_session_path do
+                Sign in
+            %li
+              = link_to new_user_registration_path do
+                Sign Up
+      - else
+        %ul.nav.navbar-nav.navbar-right#fix-me
+
+          %li
+            = link_to "#" do
+              %i.fa.fa-image
+              Today
+          %li.dropdown
+            = link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown'  do
+              = current_user.email
+              %i.fa.fa-angle-down
+            %ul.dropdown-menu
+              - if current_user.admin?
+                %li
+                  &nbsp;Sys-admin
+                %li
+                  = link_to 'Integrations', '#'
+                %li.divider
+              %li
+                = link_to 'Profile', user_path(current_user)
+              %li
+                = link_to 'Sign Out', destroy_user_session_path, class: 'sign_out', method: :delete

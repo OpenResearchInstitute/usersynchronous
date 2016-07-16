@@ -1,0 +1,21 @@
+= simple_form_for current_user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2="#{pluralize(@user.errors.count, "error")} prohibited your profile from being updated:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  .row
+    .col-md-6.col-xs-12
+      .panel.panel-default
+        .panel-heading
+          %strong
+            Profile Information
+        .panel-body
+          = f.input :email
+          = f.input :name
+          = f.input :call_sign
+  .row
+    .col-md-6.col-xs-12
+      = f.button :submit, 'Save profile changes', class: 'btn-success'
+      = link_to 'Cancel', user_path(current_user), class: 'btn btn-danger'

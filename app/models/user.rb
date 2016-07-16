@@ -15,6 +15,8 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  call_sign              :string
+#  name                   :string
 #
 # Indexes
 #
@@ -27,4 +29,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :log_files, as: :loggable, dependent: :destroy
+
+  def admin?
+    false
+  end
 end

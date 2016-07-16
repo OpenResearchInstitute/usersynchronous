@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  logeable: one
+  log_file_name: MyString
+  log_content_type: MyString
+  log_file_size: 1
+  log_updated_at: 2016-07-15 15:51:37
+
+two:
+  logeable: two
+  log_file_name: MyString
+  log_content_type: MyString
+  log_file_size: 1
+  log_updated_at: 2016-07-15 15:51:37

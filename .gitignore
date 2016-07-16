@@ -19,3 +19,6 @@
 .ruby-version
 .sass-cache/
 application.css
+
+# Ignore .env file
+.env

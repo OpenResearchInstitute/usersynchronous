@@ -1,0 +1,9 @@
+%h1
+  Welcome Back
+%p
+  = current_user.email
+%p
+  It's been
+  = time_ago_in_words(current_user.last_sign_in_at)
+  since you last signed in to QSO maps.
+  

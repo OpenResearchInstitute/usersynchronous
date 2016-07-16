@@ -1,0 +1,28 @@
+.row
+  .col-md-6.col-xs-12
+    .panel.panel-default
+      .panel-heading
+        %strong
+          Profile Information
+          .pull-right
+            = link_to edit_user_path(current_user) do
+              %i.fa.fa-pencil
+      .panel-body
+        .row
+          .col-xs-2
+            .text-right
+              Name:
+          .col-xs-10
+            = current_user.name
+        .row
+          .col-xs-2
+            .text-right
+              Email:
+          .col-xs-10
+            = current_user.email
+        .row
+          .col-xs-2
+            .text-right
+              Call Sign:
+          .col-xs-10
+            = current_user.call_sign
