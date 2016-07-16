@@ -6,35 +6,41 @@
 #  }
 
 draw = (data) ->
-
   color = d3.scale.category20b()
   width = 420
   height = 420
   xorg = width / 2
   yorg = height / 2
+  numqsos = data.length
+  angle = 360.0 / numqsos
+  maxlen = width / 2
+
   barHeight = 20
 
   x = d3.scale.linear().range([ 0, width]).domain([0, d3.max(data) ])
 
   chart = d3.select('#graph')
         .attr('width', width)
-        .attr('height', barHeight * data.length)
+        .attr('height', height)
 
-  bar = chart.selectAll('g')
+  # create groups evenly spaced around a cirle, one for each data point
+  segment = chart.selectAll('g')
         .data(data)
         .enter()
         .append('g')
-        .attr('transform', (d, i) -> 'translate(0,' + i * barHeight + ')')
+        .attr('transform', (d, i) -> 'translate(' + xorg + ',' + yorg + ') rotate(' + i * angle + ',0, 0) ')
 
-  bar.append('rect')
-        .attr('width', x)
-        .attr('height', barHeight - 1)
+  # Now create something interesting in seach segment
+  segment.append('rect')
+        .attr('width', 6)
+        .attr('height', maxlen)
+        .attr('transform', (d, i) -> 'translate( -3, 0)')
         .style 'fill', (d) -> color d
 
-  bar.append('text')
-        .attr('x', (d) -> x(d) - 10).attr('y', barHeight / 2)
-        .attr('dy', '.35em')
-        .style('fill', 'white').text (d) -> d
+#  segment.append('text')
+#        .attr('x', (d) -> x(d) - 10).attr('y', barHeight / 2)
+#        .attr('dy', '.35em')
+#        .style('fill', 'white').text (d) -> d
   return
 
 error = ->
