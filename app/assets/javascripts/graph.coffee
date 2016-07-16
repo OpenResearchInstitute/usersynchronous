@@ -9,6 +9,9 @@ draw = (data) ->
 
   color = d3.scale.category20b()
   width = 420
+  height = 420
+  xorg = width / 2
+  yorg = height / 2
   barHeight = 20
 
   x = d3.scale.linear().range([ 0, width]).domain([0, d3.max(data) ])
