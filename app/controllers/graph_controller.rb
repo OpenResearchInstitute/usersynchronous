@@ -19,6 +19,18 @@ class GraphController < ApplicationController
       },
       {
         'satellite': 'phase4',
+        'mode': 'data',
+        'duration': 600,
+        'station': 'N1NLY'
+      },
+      {
+        'satellite': 'phase4',
+        'mode': 'data',
+        'duration': 600,
+        'station': 'N1NLY'
+      },
+      {
+        'satellite': 'phase4',
         'mode': 'voice',
         'duration': 60,
         'station': 'N1NLY'
