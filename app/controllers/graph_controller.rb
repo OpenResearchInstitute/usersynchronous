@@ -4,42 +4,25 @@ class GraphController < ApplicationController
 
   def data
 
-    qsos = [
-      {
-        'satellite': 'phase4',
-        'mode': 'voice',
-        'duration': 20,
-        'station': 'N1NLY'
-      },
-      {
-        'satellite': 'phase4',
-        'mode': 'data',
-        'duration': 600,
-        'station': 'N1NLY'
-      },
-      {
-        'satellite': 'phase4',
-        'mode': 'data',
-        'duration': 600,
-        'station': 'N1NLY'
-      },
-      {
-        'satellite': 'phase4',
-        'mode': 'data',
-        'duration': 600,
-        'station': 'N1NLY'
-      },
-      {
-        'satellite': 'phase4',
-        'mode': 'voice',
-        'duration': 60,
-        'station': 'N1NLY'
-      }
-    ]
+    data = {
+      "stations":
+        [
+          { "call": "AI4QR" },
+          { "call": "N2NLY" },
+          { "call": "N1CKC" }
+        ],
+      "qsos":
+        [
+          { "weight": 1,"source": 0, "target": 1, "duration": 6, "mode": "data" },
+          { "weight": 1,"source": 0, "target": 2, "duration": 60, "mode": "voice" },
+          { "weight": 1,"source": 0, "target": 3, "duration": 600, "mode": "data" }
+        ]
+    }
 
+    # something needs to change here
     respond_to do |format|
       format.json {
-        render json: qsos
+        render json: data
       }
     end
   end
