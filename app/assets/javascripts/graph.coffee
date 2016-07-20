@@ -5,90 +5,55 @@
 #    'station': 'N1NLY',
 #  }
 
-# create four points for a polygon that is withing a segment, at an offset from the origin,
-# which is a percentage of the available width at that point.
-# TODO This isn't drawing out to the next segment like it's supposed to
-polypoints = (angle, dist, percwidth, height) ->
-  console.log('height = ' + height)
-  angle = angle/2
-  radians = angle * (Math.PI/180)
-  return "0," + (dist-height) + "  " +
-        (-1*(percwidth/100)*dist*Math.sin(radians)) + "," + dist +
-        "  0," + (dist+height) + "  " +
-        (dist*(percwidth/100)*Math.sin(radians)) + "," + dist
+# built using this example: http://bl.ocks.org/sathomas/11550728
 
-qsocolor = (mode) ->
-  if mode == "voice"
-    return "green"
-  else if mode == "data"
-    return "red"
-  else
-    return "blue"
-
-
+#qsocolor = (mode) ->
+#  if mode == "voice"
+#    return "green"
+#  else if mode == "data"
+#    return "red"
+#  else
+#    return "blue"
 
 draw = (data) ->
-  color = d3.scale.category20b()
+  nodes = data.stations
+  links = data.qsos
+
+  console.log(nodes)
+  console.log(links)
+
   width = 420
   height = 420
-  margin = 5 # leave room fro stroke widths
-  xorg = width / 2
-  yorg = height / 2
-  numqsos = data.length
-  angle = 360.0 / numqsos
-  maxlen = (width / 2) - margin
-  maxqsotime = Math.max.apply(Math, data.map((o) ->
-    o.duration
-  ))
 
-  console.log("maxqsotime = " + maxqsotime)
-
-  barHeight = 20
-
-  x = d3.scale.linear().range([ 0, width]).domain([0, d3.max(data) ])
-
-  chart = d3.select('#graph')
+  svg = d3.select('#graph')
         .attr('width', width)
         .attr('height', height)
 
-  chart.append('circle')
-        .attr('cx', xorg)
-        .attr('cy', yorg)
-        .attr('r', maxlen)
-        .attr('stroke', "black")
-        .attr('fill-opacity', 0)
-        .attr('stroke-width', "3")
+  force = d3.layout.force().size([
+    width
+    height
+  ]).nodes(nodes).links(links)
 
-  # create groups evenly spaced around a cirle, one for each data point
-  segment = chart.selectAll('g')
-        .data(data)
-        .enter()
-        .append('g')
-        .attr('transform', (d, i) -> 'translate(' + xorg + ',' + yorg + ') rotate(' + i * angle + ',0, 0) ')
+  force.linkDistance width / 3
 
-  # Now create something interesting in each segment
-  segment.append('rect')
-        .attr('width', 6)
-        .attr('height', maxlen)
-        .attr('transform', (d, i) -> 'translate( -3, 0)')
-        .style 'fill', (d) ->
-          qsocolor(d.mode)
+  link = svg.selectAll('.link').data(links).enter().append('line').attr('class', 'link')
 
-  segment.append('polygon')
-        #.attr('points', pp)
-        .attr('points', polypoints(angle, maxlen/2, 100, (d) -> (d.duration/maxqsotime)*maxlen))
-        .attr('fill', (d) ->
-          qsocolor(d.mode))
-        #.attr('fill', "red")
-        .attr('stroke', "black")
-        .attr('stroke-width', "1")
+  node = svg.selectAll('.node').data(nodes).enter().append('circle').attr('class', 'node')
 
+  force.on 'end', ->
+    node.attr('r', width / 25).attr('cx', (d) ->
+      d.x
+    ).attr 'cy', (d) ->
+      d.y
 
+    link.attr('x1', (d) -> d.source.x)
+    .attr('y1', (d) -> d.source.y)
+    .attr('x2', (d) -> d.target.x)
+    .attr 'y2', (d) -> d.target.y
+    return
 
-#  segment.append('text')
-#        .attr('x', (d) -> x(d) - 10).attr('y', barHeight / 2)
-#        .attr('dy', '.35em')
-#        .style('fill', 'white').text (d) -> d
+  force.start()
+
   return
 
 error = ->
