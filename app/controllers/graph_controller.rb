@@ -9,13 +9,14 @@ class GraphController < ApplicationController
         [
           { "call": "AI4QR" },
           { "call": "N2NLY" },
-          { "call": "N1CKC" }
+          { "call": "N1CKC" },
+          { "call": "WA2WGY"}
         ],
       "qsos":
         [
-          { "weight": 1,"source": 0, "target": 1, "duration": 6, "mode": "data" },
-          { "weight": 1,"source": 0, "target": 2, "duration": 60, "mode": "voice" },
-          { "weight": 1,"source": 0, "target": 3, "duration": 600, "mode": "data" }
+          { "source": 0, "target": 1, "duration": 6, "mode": "data" },
+          { "source": 0, "target": 2, "duration": 60, "mode": "voice" },
+          { "source": 0, "target": 3, "duration": 600, "mode": "data" }
         ]
     }
 
