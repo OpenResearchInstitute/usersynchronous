@@ -1,19 +1,14 @@
-#  {
-#    'satellite': 'phase4',
-#    'mode': 'voice',
-#    'duration': 20,
-#    'station': 'N1NLY',
-#  }
-
 # built using this example: http://bl.ocks.org/sathomas/11550728
 
-#qsocolor = (mode) ->
-#  if mode == "voice"
-#    return "green"
-#  else if mode == "data"
-#    return "red"
-#  else
-#    return "blue"
+qsocolor = (mode) ->
+  if mode == "voice"
+    return "green"
+  else if mode == "data"
+    return "red"
+  else if mode == "root"
+    return "lightblue"
+  else
+    return "blue"
 
 draw = (data) ->
   nodes = data.stations
@@ -22,8 +17,15 @@ draw = (data) ->
   console.log(nodes)
   console.log(links)
 
-  width = 420
-  height = 420
+  width = 840
+  height = 840
+
+  # Create a scale for circle size based on duration of QSO
+  minr = 30
+  maxr = 100
+  durscale = d3.scale.linear()
+        .domain d3.extent(nodes.slice(1), (d) -> d.duration)
+        .range([minr, maxr])
 
   svg = d3.select('#graph')
         .attr('width', width)
@@ -40,16 +42,25 @@ draw = (data) ->
 
   node = svg.selectAll('.node').data(nodes).enter().append('circle').attr('class', 'node')
 
+  force.on 'tick', ->
+    nodes[0].x = width / 2
+    nodes[0].y = height / 2
+    return
+        
   force.on 'end', ->
-    node.attr('r', width / 25).attr('cx', (d) ->
-      d.x
-    ).attr 'cy', (d) ->
-      d.y
+    node.attr('r', (d) -> durscale(d.duration))
+        .attr('cx', (d) -> d.x)
+        .attr('cy', (d) -> d.y)
+        .attr('stroke', "black")
+        .attr('stroke-width', 2)
+        .attr('fill', (d) -> qsocolor(d.mode))
 
     link.attr('x1', (d) -> d.source.x)
-    .attr('y1', (d) -> d.source.y)
-    .attr('x2', (d) -> d.target.x)
-    .attr 'y2', (d) -> d.target.y
+        .attr('y1', (d) -> d.source.y)
+        .attr('x2', (d) -> d.target.x)
+        .attr 'y2', (d) -> d.target.y
+        .attr('stroke', "black")
+        .attr('stroke-width', 4)
     return
 
   force.start()
