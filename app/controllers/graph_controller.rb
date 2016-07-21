@@ -8,7 +8,7 @@ class GraphController < ApplicationController
       "stations":
         [
           # this is a kluge. Duration for the root node sets the diameter
-          { "call": "AI4QR", "duration": 30, "mode": "root"},
+          { "call": "AI4QR", "duration": 10, "mode": "root"},
           { "call": "N2NLY", "duration": 6, "mode": "data" },
           { "call": "N2NLY", "duration": 60, "mode": "voice"},
           { "call": "N2NLY", "duration": 30, "mode": "data"}
