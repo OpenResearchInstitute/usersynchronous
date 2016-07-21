@@ -31,16 +31,27 @@ draw = (data) ->
         .attr('width', width)
         .attr('height', height)
 
-  force = d3.layout.force().size([
-    width
-    height
-  ]).nodes(nodes).links(links)
+  force = d3.layout.force()
+        .gravity(0.05)
+        .distance(100)
+        .charge(-100)
+        .size([width,height])
+        .nodes(nodes)
+        .links(links)
 
   force.linkDistance width / 3
 
-  link = svg.selectAll('.link').data(links).enter().append('line').attr('class', 'link')
+  link = svg.selectAll('.link')
+        .data(links)
+        .enter()
+        .append('line')
+        .attr('class', 'link')
 
-  node = svg.selectAll('.node').data(nodes).enter().append('circle').attr('class', 'node')
+  node = svg.selectAll('.node')
+        .data(nodes)
+        .enter()
+        .append('circle')
+        .attr('class', 'node')
 
   force.on 'tick', ->
     nodes[0].x = width / 2
@@ -54,6 +65,12 @@ draw = (data) ->
         .attr('stroke', "black")
         .attr('stroke-width', 2)
         .attr('fill', (d) -> qsocolor(d.mode))
+        .attr('fill-opacity', "0.4")
+    node.append('text')
+        #.attr('dx', 20)
+        #.attr('dy', ".35em")
+        #.text((d) -> d.call)
+        .text("foo")
 
     link.attr('x1', (d) -> d.source.x)
         .attr('y1', (d) -> d.source.y)
