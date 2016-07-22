@@ -9,9 +9,9 @@ class GraphController < ApplicationController
         [
           # this is a kluge. Duration for the root node sets the diameter
           { "call": "AI4QR", "duration": 0, "mode": " ", "time": " "},
-          { "call": "N2NLY", "duration": 6, "mode": "data", "time": "05/12/16 13:12" },
-          { "call": "N2NLY", "duration": 60, "mode": "voice", "time": "05/12/16 14:00"},
-          { "call": "N2NLY", "duration": 30, "mode": "data", "time": "06/27/16 01:13"}
+          { "call": "N2NLY", "duration": 6, "mode": "data", "time": "05/12/2016 13:12" },
+          { "call": "N2NLY", "duration": 60, "mode": "voice", "time": "07/04/2016 14:00"},
+          { "call": "N2NLY", "duration": 30, "mode": "data", "time": "06/27/2016 01:13"}
         ],
       "qsos":
         [
