@@ -1,14 +1,17 @@
 # built using this example: http://bl.ocks.org/sathomas/11550728
 
 qsocolor = (mode) ->
+  console.log("Enter")
+  console.log(mode)
   if mode == "voice"
-    return "green"
+    ncolor = "green"
   else if mode == "data"
-    return "red"
-  else if mode == "root"
-    return "lightblue"
+    ncolor = "red"
   else
-    return "blue"
+    ncolor = "lightblue"
+  console.log("returning")
+  console.log(ncolor)
+  return ncolor
 
 draw = (data) ->
   nodes = data.stations
@@ -21,7 +24,7 @@ draw = (data) ->
   height = 840
 
   # Create a scale for circle size based on duration of QSO
-  minr = 30
+  minr = 40
   maxr = 100
   durscale = d3.scale.linear()
         .domain d3.extent(nodes.slice(1), (d) -> d.duration)
@@ -47,11 +50,13 @@ draw = (data) ->
         .append('line')
         .attr('class', 'link')
 
-  node = svg.selectAll('.node')
+  nodeg = svg.selectAll('.node')
         .data(nodes)
         .enter()
-        .append('circle')
-        .attr('class', 'node')
+        .append('g')
+  node = nodeg.append('circle').attr('class', 'node')
+  label = nodeg.append('text').attr('class', 'label')
+  #callsign = label.append('tspan').attr('class', 'label')
 
   force.on 'tick', ->
     nodes[0].x = width / 2
@@ -65,12 +70,14 @@ draw = (data) ->
         .attr('stroke', "black")
         .attr('stroke-width', 2)
         .attr('fill', (d) -> qsocolor(d.mode))
-        .attr('fill-opacity', "0.4")
-    node.append('text')
-        #.attr('dx', 20)
-        #.attr('dy', ".35em")
-        #.text((d) -> d.call)
-        .text("foo")
+
+    label.attr('x', (d) -> d.x)
+        .attr('y', (d) -> d.y)
+    duration = (d) -> d.duration
+    label.append('tspan').text((d) -> d.call).attr('dx', 0).attr('x', (d) -> d.x).attr('dy', -14).attr('text-anchor', "middle")
+    label.append('tspan').text((d) -> d.mode).attr('dx', 0).attr('x', (d) -> d.x).attr('dy', 14).attr('text-anchor', "middle")
+    label.append('tspan').text((d) -> d.time).attr('dx', 0).attr('x', (d) -> d.x).attr('dy', 14).attr('text-anchor', "middle")
+    #label.append('tspan').text((d) -> d.duration).attr('dx', -25).attr('dy', 14).attr('text-anchor', "middle")
 
     link.attr('x1', (d) -> d.source.x)
         .attr('y1', (d) -> d.source.y)
