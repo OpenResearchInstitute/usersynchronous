@@ -17,9 +17,6 @@ draw = (data) ->
   nodes = data.stations
   links = data.qsos
 
-  console.log(nodes)
-  console.log(links)
-
   width = 840
   height = 840
 
@@ -74,9 +71,24 @@ draw = (data) ->
     label.attr('x', (d) -> d.x)
         .attr('y', (d) -> d.y)
     duration = (d) -> d.duration
-    label.append('tspan').text((d) -> d.call).attr('dx', 0).attr('x', (d) -> d.x).attr('dy', -14).attr('text-anchor', "middle")
-    label.append('tspan').text((d) -> d.mode).attr('dx', 0).attr('x', (d) -> d.x).attr('dy', 14).attr('text-anchor', "middle")
-    label.append('tspan').text((d) -> d.time).attr('dx', 0).attr('x', (d) -> d.x).attr('dy', 14).attr('text-anchor', "middle")
+    label.append('tspan')
+        .text((d) -> d.call)
+        .attr('dx', 0)
+        .attr('x', (d) -> d.x)
+        .attr('dy', -14)
+        .attr('text-anchor', "middle")
+    label.append('tspan')
+        .text((d) -> d.mode)
+        .attr('dx', 0)
+        .attr('x', (d) -> d.x)
+        .attr('dy', 14)
+        .attr('text-anchor', "middle")
+    label.append('tspan')
+        .text((d) -> d.time)
+        .attr('dx', 0)
+        .attr('x', (d) -> d.x)
+        .attr('dy', 14)
+        .attr('text-anchor', "middle")
     #label.append('tspan').text((d) -> d.duration).attr('dx', -25).attr('dy', 14).attr('text-anchor', "middle")
 
     link.attr('x1', (d) -> d.source.x)
