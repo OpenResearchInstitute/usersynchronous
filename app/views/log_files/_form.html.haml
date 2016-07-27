@@ -1,0 +1,12 @@
+= simple_form_for([current_user,@log_file], html: {multipart: true} ) do |f|
+  - if @log_file.errors.any?
+    #error_explanation
+      %h2="#{pluralize(@log_file.errors.count,"error")} prohibited your file from being uploaded:"
+      %ul
+        - @log_file.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-inputs
+    = f.input :log, as: :file
+  .form-actions
+    = f.button :submit

@@ -26,3 +26,34 @@
               Call Sign:
           .col-xs-10
             = current_user.call_sign
+  .col-md-6.col-x-12
+    .panel.panel-default
+      .panel-heading
+        %strong
+          Log Files
+          .pull-right
+            = link_to new_user_log_file_path(current_user) do
+              %i.fa.fa-plus
+      .panel-body
+        %table.table.table-stripped.table-hover
+          %thead
+            %tr
+              %th
+                File
+              %th
+                Uploaded
+              %th
+                Actions
+          %tbody
+            - current_user.log_files.each do |log_file|
+              %tr
+                %td
+                  = log_file.log_file_name
+                %td
+                  = time_ago_in_words log_file.created_at
+                  ago
+                %td
+                  = link_to log_file.log.url, target: '_blank' do
+                    %i.fa.fa-newspaper-o
+                  = link_to user_log_file_path(current_user, log_file), :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                    %i.fa.fa-trash-o
