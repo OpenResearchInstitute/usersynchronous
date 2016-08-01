@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :users, only: [:show, :edit, :update, :destroy]
+  resources :users, only: [:show, :edit, :update, :destroy] do
+    resources :log_files
+  end
 
   root controller: 'main', action: 'index'
 end

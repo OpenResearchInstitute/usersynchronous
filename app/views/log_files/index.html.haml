@@ -1,0 +1,37 @@
+.container
+  .row
+    .col-md-12
+      %h1
+        = current_user.display_name
+        \- Log Files
+  .row
+    .col-md-12
+      %table.table.table-hover.table-stripped
+        %thead
+          %tr
+            %th
+              File
+            %th
+              Uploaded
+            %th
+              Actions
+
+        %tbody
+          - current_user.log_files.each do |log_file|
+            %tr
+              %td
+                = log_file.log_file_name
+              %td
+                = time_ago_in_words log_file.created_at
+                ago
+              %td
+                = link_to user_log_file_path(current_user, log_file) do
+                  %i.fa.fa-newspaper-o
+                = link_to edit_user_log_file_path(current_user, log_file) do
+                  %i.fa.fa-pencil
+                = link_to user_log_file_path(current_user, log_file), :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                  %i.fa.fa-trash-o
+
+      %br
+
+      = link_to 'New Log file', new_user_log_file_path(current_user)

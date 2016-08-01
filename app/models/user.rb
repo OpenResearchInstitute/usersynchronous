@@ -32,6 +32,10 @@ class User < ApplicationRecord
 
   has_many :log_files, as: :loggable, dependent: :destroy
 
+  def display_name
+    name.nil? ? email : name
+  end
+
   def admin?
     false
   end

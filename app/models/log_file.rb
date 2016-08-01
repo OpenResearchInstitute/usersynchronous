@@ -18,7 +18,7 @@
 #
 
 class LogFile < ApplicationRecord
-  belongs_to :loggable
+  belongs_to :loggable, polymorphic: true
 
   has_attached_file :log
 
