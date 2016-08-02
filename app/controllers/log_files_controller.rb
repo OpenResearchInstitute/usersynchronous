@@ -30,7 +30,7 @@ class LogFilesController < ApplicationController
         
     respond_to do |format|
       if @log_file.save
-        format.html { redirect_to user_log_files(current_user), notice: 'Log file was successfully created.' }
+        format.html { redirect_to user_log_files_path(current_user), notice: 'Log file was successfully created.' }
         format.json { render :show, status: :created, location: @log_file }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class LogFilesController < ApplicationController
   def destroy
     @log_file.destroy
     respond_to do |format|
-      format.html { redirect_to log_files_url, notice: 'Log file was successfully destroyed.' }
+      format.html { redirect_to user_url(current_user), notice: 'Log file was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
