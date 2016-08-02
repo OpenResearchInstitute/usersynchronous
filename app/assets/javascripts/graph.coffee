@@ -28,19 +28,21 @@ draw = (data) ->
 
   table = d3.select("#qsotable")
 
-  tblhdr = table.append('tr')
-  tblhdr.append('td').text("Day")
-  tblhdr.append('td').text("Month")
-  tblhdr.append('td').text("Year")
-  tblhdr.append('td').text("Time (UTC)")
-  tblhdr.append('td').text("Duration (S)")
-  tblhdr.append('td').text("Mode")
+  tblhdr = table.append('thead')
+  thead = tblhdr.append('tr')
+  thead.append('th').text("Day")
+  thead.append('th').text("Month")
+  thead.append('th').text("Year")
+  thead.append('th').text("Time (UTC)")
+  thead.append('th').text("Duration (S)")
+  thead.append('th').text("Mode")
 
   numqsos = nodes.length
   console.log(numqsos)
   i = 1
+  tbody = table.append('tbody')
   while i < numqsos
-    qrow = table.append('tr')
+    qrow = tbody.append('tr')
     qrow.append('td').text(nodes[i].time.split('/')[1]) # day
     qrow.append('td').text(nodes[i].time.split('/')[0]) # month
     qrow.append('td').text(nodes[i].time.split('/')[2].split(' ')[0]) # year
